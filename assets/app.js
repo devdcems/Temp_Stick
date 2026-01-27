@@ -1,3 +1,5 @@
+const API_BASE_URL = window.API_BASE_URL || "";
+
 const BUSINESS_THRESHOLDS_F = {
   ambient: { min: 34, max: 90 },
   probe: { min: 34, max: 60 },
@@ -59,8 +61,15 @@ function formatDateEastern(value) {
   return easternFormatter.format(date);
 }
 
+function withApiBase(url) {
+  if (!API_BASE_URL || url.startsWith("http")) {
+    return url;
+  }
+  return `${API_BASE_URL}${url}`;
+}
+
 async function fetchJson(url, options) {
-  const res = await fetch(url, {
+  const res = await fetch(withApiBase(url), {
     headers: { "Content-Type": "application/json" },
     ...options,
   });
@@ -372,8 +381,23 @@ function renderSensors() {
 }
 
 async function loadSensors() {
-  const data = await fetchJson("/api/sensors");
-  state.sensors = data?.data?.items || [];
+  let items = [];
+
+  if (!API_BASE_URL) {
+    try {
+      const snapshot = await fetchJson("assets/data.json");
+      items = snapshot?.items || [];
+    } catch (error) {
+      // Fall back to API if available locally.
+      const data = await fetchJson("/api/sensors");
+      items = data?.data?.items || [];
+    }
+  } else {
+    const data = await fetchJson("/api/sensors");
+    items = data?.data?.items || [];
+  }
+
+  state.sensors = items;
   renderSensors();
 }
 

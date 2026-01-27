@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Environment
 .env
 .env.*
@@ -31,6 +30,3 @@ build/
 
 # Misc
 .cache/
-=======
-.env
->>>>>>> 40b1e98ec2dc9eb6c7e9e29be77f34925061c5fa
