@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TempStick Dashboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar__title">
+        <img class="topbar__logo" src="/images/logo_3.png" alt="TempStick" />
+        <span>TempStick Dashboard</span>
+      </div>
+      <div class="topbar__actions">
+        <button id="refreshBtn" class="btn">Refresh</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section
+        class="panel panel--split panel--collapsed"
+        id="notificationsPanel"
+      >
+        <div class="panel__header">
+          <h2 class="panel__title">Notifications</h2>
+          <div class="panel__actions">
+            <button
+              id="notificationsToggle"
+              class="btn btn--ghost"
+              aria-expanded="false"
+            >
+              Show
+            </button>
+          </div>
+        </div>
+        <div id="notifications" class="panel__body list">Loading…</div>
+      </section>
+
+      <section class="panel panel--full">
+        <div class="panel__header">
+          <h2 class="panel__title">Sensors</h2>
+          <div class="panel__actions">
+            <div class="filter-group" role="group" aria-label="Name filters">
+              <button class="filter-btn" data-filter="all">
+                All
+              </button>
+              <button class="filter-btn filter-btn--active" data-filter="medic">
+                Medic
+              </button>
+              <button class="filter-btn" data-filter="backup">Backup</button>
+            </div>
+            <input
+              id="searchInput"
+              class="input"
+              type="search"
+              placeholder="Search sensors"
+            />
+            <label class="checkbox">
+              <input id="hideOffline" type="checkbox" checked="true" />
+              Hide offline
+            </label>
+          </div>
+        </div>
+        <div class="panel__body">
+          <div id="sensorsMeta" class="muted">Loading sensors…</div>
+          <div id="sensorsRows" class="sensors-rows" aria-live="polite">
+            Loading sensors…
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

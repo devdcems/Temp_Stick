@@ -1,0 +1,22 @@
+{
+  "name": "tempstick",
+  "version": "1.0.0",
+  "description": "TempStick API helper CLI",
+  "main": "src/cli.js",
+  "scripts": {
+    "dashboard": "node src/server.js",
+    "cli": "node src/cli.js",
+    "sensors": "node src/cli.js sensors",
+    "alerts": "node src/cli.js alerts",
+    "user": "node src/cli.js user",
+    "user-notifications": "node src/cli.js user-notifications"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1"
+  }
+}
