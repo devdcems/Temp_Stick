@@ -78,29 +78,6 @@ async function fetchJson(url, options) {
   return data;
 }
 
-function renderNotifications() {
-  const container = document.getElementById("notifications");
-  const items = state.notifications;
-
-  if (!items.length) {
-    container.innerHTML = `<div class="muted">No recent notifications.</div>`;
-    return;
-  }
-
-  container.innerHTML = items
-    .map((item) => {
-      const sensorName = item.sensor?.sensor_name || item.sensor_id || "Sensor";
-      return `
-        <div class="list-item">
-          <div class="list-item__title">${sensorName}</div>
-          <div>${item.event_type}: ${item.event_message}</div>
-          <div class="list-item__meta">${item.created}</div>
-        </div>
-      `;
-    })
-    .join("");
-}
-
 function getAmbientThresholdF(sensor, key) {
   const raw = sensor[key];
   if (raw === "" || raw === null || raw === undefined) return null;
@@ -400,14 +377,8 @@ async function loadSensors() {
   renderSensors();
 }
 
-async function loadNotifications() {
-  const data = await fetchJson("/api/notifications?items_per_page=25&page=0");
-  state.notifications = data?.data?.items || [];
-  renderNotifications();
-}
-
 async function refreshAll() {
-  await Promise.all([loadSensors(), loadNotifications()]);
+  await loadSensors();
 }
 
 function wireEvents() {
@@ -428,16 +399,7 @@ function wireEvents() {
     });
   });
 
-  const notificationsPanel = document.getElementById("notificationsPanel");
-  const notificationsToggle = document.getElementById("notificationsToggle");
-
-  if (notificationsPanel && notificationsToggle) {
-    notificationsToggle.addEventListener("click", () => {
-      const isCollapsed = notificationsPanel.classList.toggle("panel--collapsed");
-      notificationsToggle.textContent = isCollapsed ? "Show" : "Hide";
-      notificationsToggle.setAttribute("aria-expanded", String(!isCollapsed));
-    });
-  }
+  // Notifications removed.
 }
 
 wireEvents();

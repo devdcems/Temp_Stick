@@ -84,17 +84,6 @@ body {
   box-shadow: 0 10px 30px rgba(2, 8, 23, 0.35);
 }
 
-.panel--split {
-  min-height: 180px;
-}
-
-.panel--collapsed .panel__body {
-  display: none;
-}
-
-.panel--collapsed {
-  min-height: unset;
-}
 
 .panel--full {
   min-height: 0;

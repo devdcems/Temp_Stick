@@ -24,8 +24,8 @@ const PORT = process.env.PORT || 8787;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const publicDir = path.join(__dirname, "..", "public");
-app.use(express.static(publicDir));
+const assetsDir = path.join(__dirname, "..", "assets");
+app.use("/assets", express.static(assetsDir));
 
 const imagesDir = path.join(__dirname, "..", "images");
 app.use("/images", express.static(imagesDir));
@@ -205,8 +205,10 @@ app.post("/api/sensor/:sensorId", async (req, res) => {
   }
 });
 
+const rootIndex = path.join(__dirname, "..", "index.html");
+
 app.get(/.*/, (_req, res) => {
-  res.sendFile(path.join(publicDir, "index.html"));
+  res.sendFile(rootIndex);
 });
 
 app.listen(PORT, () => {
