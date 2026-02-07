@@ -95,21 +95,21 @@ async function fetchJson(url, options) {
   return data;
 }
 
-function getAmbientThresholdF(sensor, key) {
+function getAmbientThresholdC(sensor, key) {
   const raw = sensor[key];
   if (raw === "" || raw === null || raw === undefined) return null;
   const num = Number(raw);
   if (Number.isNaN(num)) return null;
-  if (num <= -90) return null;
-  return cToF(num, 1);
+  if (num <= -90) return null; // Invalid threshold marker
+  return num;
 }
 
-function getProbeThresholdF(sensor, key) {
+function getProbeThresholdC(sensor, key) {
   const raw = sensor[key];
   if (raw === "" || raw === null || raw === undefined) return null;
   const num = Number(raw);
   if (Number.isNaN(num)) return null;
-  return cToF(num, 1);
+  return num;
 }
 
 function statusPill(sensor) {
