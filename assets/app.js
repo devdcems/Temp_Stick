@@ -272,23 +272,18 @@ function renderSensors() {
         ? Number(sensor.last_tcTemp_c)
         : null;
 
-    const ambientMinF =
-      getAmbientThresholdF(sensor, "alert_temp_below") ??
-      BUSINESS_THRESHOLDS_F.ambient.min;
-    const ambientMaxF =
-      getAmbientThresholdF(sensor, "alert_temp_above") ??
-      BUSINESS_THRESHOLDS_F.ambient.max;
-    const probeMinF =
-      getProbeThresholdF(sensor, "minTcTemp") ??
-      BUSINESS_THRESHOLDS_F.probe.min;
-    const probeMaxF =
-      getProbeThresholdF(sensor, "maxTcTemp") ??
-      BUSINESS_THRESHOLDS_F.probe.max;
-
-    const ambientMinC = fToC(ambientMinF, 2);
-    const ambientMaxC = fToC(ambientMaxF, 2);
-    const probeMinC = fToC(probeMinF, 2);
-    const probeMaxC = fToC(probeMaxF, 2);
+    const ambientMinC =
+      getAmbientThresholdC(sensor, "alert_temp_below") ??
+      fToC(BUSINESS_THRESHOLDS_F.ambient.min, 2);
+    const ambientMaxC =
+      getAmbientThresholdC(sensor, "alert_temp_above") ??
+      fToC(BUSINESS_THRESHOLDS_F.ambient.max, 2);
+    const probeMinC =
+      getProbeThresholdC(sensor, "minTcTemp") ??
+      fToC(BUSINESS_THRESHOLDS_F.probe.min, 2);
+    const probeMaxC =
+      getProbeThresholdC(sensor, "maxTcTemp") ??
+      fToC(BUSINESS_THRESHOLDS_F.probe.max, 2);
 
     const ambientAlert =
       !offline && isOutOfRangeCelsius(ambientTempC, ambientMinC, ambientMaxC);
@@ -305,10 +300,10 @@ function renderSensors() {
       displayName,
       ambientTempC,
       probeTempC,
-      ambientMinF,
-      ambientMaxF,
-      probeMinF,
-      probeMaxF,
+      ambientMinC,
+      ambientMaxC,
+      probeMinC,
+      probeMaxC,
       ambientAlert,
       probeAlert,
       rowAlert,
@@ -340,15 +335,21 @@ function renderSensors() {
         displayName,
         ambientTempC,
         probeTempC,
-        ambientMinF,
-        ambientMaxF,
-        probeMinF,
-        probeMaxF,
+        ambientMinC,
+        ambientMaxC,
+        probeMinC,
+        probeMaxC,
         ambientAlert,
         probeAlert,
         rowAlert,
         hasProbe,
       } = item;
+
+      // Convert thresholds to Fahrenheit for display
+      const ambientMinF = cToF(ambientMinC, 1);
+      const ambientMaxF = cToF(ambientMaxC, 1);
+      const probeMinF = cToF(probeMinC, 1);
+      const probeMaxF = cToF(probeMaxC, 1);
 
       const ambientThermo = thermometerCardHtml({
         label: "Drawer",
