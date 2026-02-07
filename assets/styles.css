@@ -317,7 +317,7 @@ body {
 }
 
 .sensor-row--offline {
-  opacity: 0.78;
+  opacity: 0.25;
 }
 
 @keyframes sensorAlertBlink {
@@ -339,7 +339,7 @@ body {
   border-color: rgba(239, 68, 68, 0.6);
   background: linear-gradient(
     180deg,
-    rgba(127, 29, 29, 0.28),
+    rgba(246, 0, 0, 0.28),
     rgba(11, 18, 32, 0.82)
   );
 }
@@ -368,7 +368,7 @@ body {
 }
 
 .thermo-card {
-  border: 1px solid var(--border);
+  border: 2px solid greenyellow;
   border-radius: 12px;
   padding: 8px;
   background: rgba(15, 23, 42, 0.55);
@@ -376,12 +376,13 @@ body {
   grid-template-columns: 52px 1fr;
   gap: 8px;
   align-items: center;
-  min-height: 100px;
+  min-height: auto;
 }
 
 .thermo-card--empty {
-  opacity: 0.72;
+  opacity: 0.2;
   border-style: dashed;
+  border-color: gray;
 }
 
 .thermo-card--alert {
