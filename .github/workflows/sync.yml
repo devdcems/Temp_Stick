@@ -2,19 +2,16 @@ name: Sync fork with upstream
 
 on:
   schedule:
-    - cron: '*/30 * * * *'   # every 30 minutes
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Sync upstream
-        uses: aormsby/Fork-Sync-With-Upstream-action@v3
+      - name: Sync fork
+        uses: tgymnich/fork-sync@v1
         with:
-          upstream_repository: MedicD21/TempStick
-          upstream_branch: main
-          target_branch: main
+          owner: MedicD21
+          repo: TempStick
           github_token: ${{ secrets.GITHUB_TOKEN }}
