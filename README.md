@@ -243,3 +243,14 @@ Good next moves:
 
 - Run `node src/cli.js sensors` and identify the specific sensors you want to configure.
 - Tell me the alert thresholds and intervals you want, and I can add a dedicated “apply-alerts” script that updates all sensors consistently.
+
+<div class="checkins">
+            <div class="checkins__item">
+              <div class="checkins__label">Last</div>
+              <div class="checkins__value">${formatDateEastern(sensor.last_checkin)}</div>
+            </div>
+            <div class="checkins__item">
+              <div class="checkins__label">Next</div>
+              <div class="checkins__value">${formatDateEastern(sensor.next_checkin)}</div>
+            </div>
+          </div>

@@ -389,16 +389,6 @@ function renderSensors() {
             ${ambientThermo}
             ${probeThermo}
           </div>
-          <div class="checkins">
-            <div class="checkins__item">
-              <div class="checkins__label">Last</div>
-              <div class="checkins__value">${formatDateEastern(sensor.last_checkin)}</div>
-            </div>
-            <div class="checkins__item">
-              <div class="checkins__label">Next</div>
-              <div class="checkins__value">${formatDateEastern(sensor.next_checkin)}</div>
-            </div>
-          </div>
         </div>
       `;
     })
